@@ -1,4 +1,4 @@
-package com.noahr_atc.midisplitter;
+package com.github.noahr_atc.midisplitter;
 
 /*
 Copyright 2020 Noah Reeder

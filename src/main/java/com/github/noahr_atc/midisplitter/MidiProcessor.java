@@ -1,4 +1,4 @@
-package com.noahr_atc.midisplitter;
+package com.github.noahr_atc.midisplitter;
 
 /*
 Copyright 2020 Noah Reeder
@@ -101,7 +101,7 @@ public class MidiProcessor implements Receiver {
         // If the receiver is closed, log it and continue
         if (message instanceof ShortMessage) { message = translateMessage((ShortMessage) message); }
         try { midiOut.send(message, timeStamp); } catch (IllegalStateException e) {
-            Logger.getLogger("com.noahr_atc.midisplitter.MidiProcessor").log(
+            Logger.getLogger("MidiProcessor").log(
                     Level.SEVERE,
                     "Receiver " + midiOut.toString() + "closed",
                     e
