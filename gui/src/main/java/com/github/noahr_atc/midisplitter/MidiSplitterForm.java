@@ -22,6 +22,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+import com.github.noahr_atc.midisplitter.MidiProcessor;
+
 /**
  * The GUI for {@link MidiSplitter}. This {@linkplain javax.swing Swing} GUI allows the user to
  * choose the input and output devices to perform note translations on, as well as to start and stop note translations.

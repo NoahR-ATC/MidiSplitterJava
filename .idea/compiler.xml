@@ -6,10 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="MidiSplitterJava" />
+        <module name="lib" />
+        <module name="gui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="gui" target="1.8" />
+      <module name="lib" target="1.8" />
       <module name="MidiSplitterJava" target="1.8" />
     </bytecodeTargetLevel>
   </component>

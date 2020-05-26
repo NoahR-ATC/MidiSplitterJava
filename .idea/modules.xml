@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/MidiSplitterJava.iml" filepath="$PROJECT_DIR$/.idea/MidiSplitterJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MidiSplitterJava.iml" filepath="$PROJECT_DIR$/MidiSplitterJava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gui/gui.iml" filepath="$PROJECT_DIR$/gui/gui.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
     </modules>
   </component>
 </project>
