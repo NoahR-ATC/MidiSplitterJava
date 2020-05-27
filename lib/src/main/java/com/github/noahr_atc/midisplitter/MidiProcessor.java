@@ -43,7 +43,8 @@ public class MidiProcessor implements Receiver {
     private boolean debugMode;
 
     /**
-     * Constructs a {@code MidiProcessor} with the option to run in debugging mode. All MIDI channels are set to available.
+     * Constructs a {@code MidiProcessor} using a {@link MidiDevice} with the option to run in debugging mode. All MIDI
+     * channels are set to available.
      *
      * @param midiReceiver the MIDI device to send processed messages to
      * @param debugMode    specifies whether to enable debugging messages
@@ -70,17 +71,47 @@ public class MidiProcessor implements Receiver {
         this.debugMode = debugMode;
 
         if (debugMode) {
-            Logger.getLogger("com.noahr_atc.midisplitter").log(Level.INFO, "Sending to: " + midiReceiver.getDeviceInfo().getName());
+            Logger.getLogger("MidiProcessor").log(Level.INFO, "Sending to: " + midiReceiver.getDeviceInfo().getName());
         }
-    } // End MidiProcessor constructor
+    } // End MidiProcessor(MidiDevice, boolean) constructor
 
     /**
-     * Constructs a {@code MidiProcessor} without debugging output. All MIDI channels are set to available.
+     * Constructs a {@code MidiProcessor} using a {@link MidiDevice} without debugging output. All MIDI channels are set to available.
      *
      * @param midiReceiver the MIDI device to send processed messages to
      * @throws MidiUnavailableException if the provided {@link MidiDevice} won't supply a receiver
      */
-    public MidiProcessor(MidiDevice midiReceiver) throws MidiUnavailableException { new MidiProcessor(midiReceiver, false); }
+    public MidiProcessor(MidiDevice midiReceiver) throws MidiUnavailableException { this(midiReceiver, false); }
+
+    /**
+     * Constructs a {@code MidiProcessor} using a {@link Receiver} with the option to run in debugging mode. All MIDI
+     * channels are set to available.
+     *
+     * @param receiver  the MIDI receiver to send processed messages to
+     * @param debugMode specifies whether to enable debugging messages
+     */
+    public MidiProcessor(Receiver receiver, boolean debugMode) {
+        channelStatuses = new ChannelStatus[]{
+                new ChannelStatus(), new ChannelStatus(), new ChannelStatus(), new ChannelStatus(),
+                new ChannelStatus(), new ChannelStatus(), new ChannelStatus(), new ChannelStatus(),
+                new ChannelStatus(), new ChannelStatus(), new ChannelStatus(), new ChannelStatus(),
+                new ChannelStatus(), new ChannelStatus(), new ChannelStatus(), new ChannelStatus()
+        }; // End ChannelStatus[] initialization
+        noteTranslations = ArrayListMultimap.create();
+        this.midiOut = receiver;
+        this.debugMode = debugMode;
+        isOpen = true;
+        if (debugMode) {
+            Logger.getLogger("MidiProcessor").log(Level.INFO, "Sending to Receiver: " + midiOut.toString());
+        }
+    } // End MidiProcessor(Receiver, boolean) constructor
+
+    /**
+     * Constructs a {@code MidiProcessor} using a {@link Receiver} without debugging output. All MIDI channels are set to available.
+     *
+     * @param receiver the MIDI receiver to send processed messages to
+     */
+    public MidiProcessor(Receiver receiver) { this(receiver, false); }
 
     /**
      * Sends a MIDI message to this receiver, along with an optional timestamp. Set timestamp to -1 if not used.
@@ -95,7 +126,7 @@ public class MidiProcessor implements Receiver {
 
         // Ensure that the midi receiver objects are valid, aborting the send operation if unavailable since we can't throw
         // an exception in the overridden method
-        if (midiReceiver == null || midiOut == null) { return; }
+        if (midiOut == null) { return; }
 
         // If the message is a ShortMessage send it to the translator for processing, regardless forwarding the message to the receiver
         // If the receiver is closed, log it and continue
@@ -115,7 +146,7 @@ public class MidiProcessor implements Receiver {
     @Override
     public void close() {
         isOpen = false; // Stop advertising as available to process messages
-        if (midiReceiver.isOpen()) { midiReceiver.close(); }
+        if (midiReceiver != null && midiReceiver.isOpen()) { midiReceiver.close(); }
         midiReceiver = null;
         midiOut = null;
     } // End close method
@@ -128,11 +159,12 @@ public class MidiProcessor implements Receiver {
     public boolean isRunning() { return isOpen; }
 
     /**
-     * Sets the MIDI device that processed messages are sent to.
+     * Opens a MIDI device and sets it as the {@link Receiver} that processed messages are sent to.
      *
-     * @param midiReceiver the desired MIDI receiver
+     * @param midiReceiver the desired MIDI device to receive messages
      * @throws MidiUnavailableException if the provided {@link MidiDevice} won't supply a receiver
      * @throws NullPointerException     if the provided {@link MidiDevice} is null
+     * @see #setReceiver(Receiver)
      */
     public void setReceiver(MidiDevice midiReceiver) throws MidiUnavailableException, NullPointerException {
         if (midiReceiver == null) { throw new IllegalArgumentException(); }
@@ -150,13 +182,30 @@ public class MidiProcessor implements Receiver {
         }
 
         // Update the objects
-        if (this.midiReceiver.isOpen()) { this.midiReceiver.close(); }
+        if (this.midiReceiver != null && this.midiReceiver.isOpen()) { this.midiReceiver.close(); }
         this.midiReceiver = midiReceiver;
         this.midiOut = receiver;
         if (debugMode) {
             Logger.getLogger("com.noahr_atc.midisplitter").log(Level.INFO, "Sending to: " + midiReceiver.getDeviceInfo().getName());
         }
-    } // End setReceiver method
+    } // End setReceiver(MidiDevice) method
+
+    /**
+     * Sets the {@link Receiver} that processed messages are sent to.
+     *
+     * @param receiver the desired MIDI receiver
+     * @see #setReceiver(MidiDevice)
+     */
+    public void setReceiver(Receiver receiver) {
+        if (midiReceiver != null) {
+            if (midiReceiver.isOpen()) { midiReceiver.close(); }
+            midiReceiver = null;
+        }
+        this.midiOut = receiver;
+        if (debugMode) {
+            Logger.getLogger("MidiProcessor").log(Level.INFO, "Sending to Receiver: " + midiOut.toString());
+        }
+    } // End setReceiver(Receiver) method
 
     /**
      * Reports whether or not a MIDI channel is currently in use.
