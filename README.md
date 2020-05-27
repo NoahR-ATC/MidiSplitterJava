@@ -1,4 +1,5 @@
-[![Maven Central](https://img.shields.io/maven-central/v/com.github.noahr-atc.midisplitter/lib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.noahr-atc.midisplitter%22%20AND%20a:%22lib%22)
+GUI: [![Maven Central](https://img.shields.io/maven-central/v/com.github.noahr-atc.midisplitter/gui.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.noahr-atc.midisplitter%22%20AND%20a:%22gui%22)  
+Library: [![Maven Central](https://img.shields.io/maven-central/v/com.github.noahr-atc.midisplitter/lib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.noahr-atc.midisplitter%22%20AND%20a:%22lib%22)
 # MidiSplitterJava
 Takes MIDI input from one device, distributes messages across all 16 MIDI channels, and outputs the recreated messages to another MIDI device.
 
@@ -8,7 +9,8 @@ Takes MIDI input from one device, distributes messages across all 16 MIDI channe
 - Run `MidiSplitterJava.bat` if on Windows, `./MidiSplitter` if on Linux, or `java -jar MidiSplitterJava.jar` on either if you want to add command line arguments
 
 ## Development
-Check out [the latest release's Javadocs](https://noahr-atc.github.io/MidiSplitterJava).
+Check out [the latest release's Javadocs](https://noahr-atc.github.io/MidiSplitterJava).  
+If you would like to use the MidiSplitter library as a dependency it is [available through Maven here](https://search.maven.org/artifact/com.github.noahr-atc.midisplitter/gui/1.1.0/jar).
 
 ---
 Copyright 2020 Noah Reeder, licensed under [Apache-2.0](LICENSE)
