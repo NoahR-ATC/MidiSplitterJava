@@ -3,18 +3,51 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>MidiSplitterJava</artifactId>
+        <artifactId>root</artifactId>
         <groupId>com.github.noahr-atc.midisplitter</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>gui</artifactId>
+
+    <name>MIDI Splitter (Java) GUI</name>
+    <description>GUI for controlling the MIDI Splitter core library</description>
+    <url>https://github.com/NoahR-ATC/MidiSplitterJava</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/NoahR-ATC/MidiSplitterJava.git</connection>
+        <developerConnection>scm:git:git@github.com:NoahR-ATC/MidiSplitterJava.git</developerConnection>
+        <url>https://github.com/NoahR-ATC/MidiSplitterJava</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Noah Reeder</name>
+            <email>noahreederatc@gmail.com</email>
+            <organization>com.github.noahr-atc</organization>
+            <organizationUrl>https://github.com/NoahR-ATC</organizationUrl>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
             <groupId>com.github.noahr-atc.midisplitter</groupId>
             <artifactId>lib</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>19.0.0</version>
         </dependency>
     </dependencies>
 </project>
