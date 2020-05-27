@@ -1,3 +1,4 @@
+[![Maven Central](https://img.shields.io/maven-central/v/com.github.noahr-atc.midisplitter/lib.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.noahr-atc.midisplitter%22%20AND%20a:%22lib%22)
 # MidiSplitterJava
 Takes MIDI input from one device, distributes messages across all 16 MIDI channels, and outputs the recreated messages to another MIDI device.
 
