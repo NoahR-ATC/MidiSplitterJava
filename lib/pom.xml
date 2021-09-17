@@ -26,7 +26,7 @@
     </build>
 
     <artifactId>lib</artifactId>
-  <version>1.1.2</version>
+  <version>1.1.2-SNAPSHOT</version>
 
     <name>MIDI Splitter (Java) Core Library</name>
     <description>Splits notes in incoming MIDI messages across all available MIDI channels</description>
@@ -45,7 +45,7 @@
         <connection>scm:git:https://github.com/NoahR-ATC/MidiSplitterJava.git</connection>
         <developerConnection>scm:git:git@github.com:NoahR-ATC/MidiSplitterJava.git</developerConnection>
         <url>https://github.com/NoahR-ATC/MidiSplitterJava</url>
-      <tag>lib-1.1.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <developers>
